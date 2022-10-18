@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrbitSimulator.Pages.RocketBuildPage"
+             xmlns:controls="clr-namespace:OrbitSimulator.Controls"
+             Title="Create Rocket">
+    <ContentPage.Content>
+        <ScrollView x:Name="scrollView_Main" Margin="20">
+            <StackLayout Spacing="20">
+                <controls:LabelledInput x:Name="input_RocketName" Label="Name" AlertInvalid="False" IsNumeric="False" InputWidth="100" />
+                <StackLayout x:Name="stck_Stages"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="btn_AddStage" Text="Add Stage" Clicked="btn_AddStage_Clicked"/>
+                    <Button x:Name="btn_Start" Text="Save and Launch" Clicked="btn_Start_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

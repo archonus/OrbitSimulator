@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OrbitSimulator.Controls" 
+             xmlns:orbitsimulator="clr-namespace:OrbitSimulator" 
+             x:DataType="orbitsimulator:SimulationViewModel"
+             x:Class="OrbitSimulator.Pages.FlightPage"
+             Title="Rocket Flight Simulation">
+    <ContentPage.Content>
+        <!--Main Content-->
+        <StackLayout x:Name="stck_Main" Padding="5">
+            <StackLayout Orientation="Horizontal" Spacing="20">
+                <!--Top Bar-->
+                <Button x:Name="btn_PlayPause" 
+                        VerticalOptions="Center"
+                        Text="Play"
+                        Command="{Binding PlayPauseCommand}">
+                    <Button.Triggers>
+                        <!--For changing the value of the text based on whether the simulation is running-->
+                        <DataTrigger TargetType="Button" Binding="{Binding Timer.IsRunning}" Value="true">
+                            <Setter Property="Text" Value="Pause"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding Timer.IsRunning}" Value="false">
+                            <Setter Property="Text" Value="Play"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <controls:TimeRatioControl x:Name="timeRatioControl" VerticalOptions="Center"/>
+                <controls:ThrottleControlView x:Name="throttleControl"/>
+                <Button x:Name="btn_Eject" Text="Eject" Command="{Binding EjectCommand}" VerticalOptions="Center"/>
+                <Button x:Name="btn_End" Text="End Simulation" Clicked="btn_End_Clicked" VerticalOptions="Center"/>
+            </StackLayout>
+            <controls:RocketImageView x:Name="rocketImageView"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

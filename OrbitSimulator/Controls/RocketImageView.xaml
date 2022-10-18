@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OrbitSimulator.Controls" 
+             xmlns:orbitsimulator="clr-namespace:OrbitSimulator" 
+             x:DataType="orbitsimulator:SimulationViewModel"
+             x:Class="OrbitSimulator.Controls.RocketImageView">
+    <ContentView.Content>
+        <AbsoluteLayout x:Name="layout_RocketDisplay" 
+                        VerticalOptions="Fill" 
+                        Padding="0"
+                        BackgroundColor="{Binding SkyColour}">
+            <!--Background colour changes through the binding-->
+            <!--Box to represent the ground-->
+            <BoxView x:Name="box_Ground" Color="ForestGreen" 
+                     AbsoluteLayout.LayoutBounds="0,1,1,0.45" 
+                     AbsoluteLayout.LayoutFlags="All"/>
+            <!--Collection of the rocket images to display the rocket-->
+            <Grid x:Name="grid_RocketImages"
+                    RowSpacing="0"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds="0.5,0.45,0.5,0.5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image x:Name="img_RocketTop"/>
+                <Image x:Name="img_RocketBottom"/>
+                <Image x:Name="img_Flames" IsVisible="{Binding InPoweredFlight}" AnchorY="0"/>
+            </Grid>
+            <!--The button to turn the rocket to the left-->
+            <ImageButton 
+                x:Name="imgbtn_Left"
+                AbsoluteLayout.LayoutBounds="0.2,0.45,0.2,0.2"
+                AbsoluteLayout.LayoutFlags="All"
+                IsVisible="{Binding Timer.IsRunning}"
+                Pressed="imgbtn_Left_Pressed"
+                Released="ThrustDirectionButton_Released"/>
+            <!--The button to turn the rocket to the right-->
+            <ImageButton 
+                x:Name="imgbtn_Right"
+                AbsoluteLayout.LayoutBounds="0.8,0.45,0.2,0.2"
+                AbsoluteLayout.LayoutFlags="All"
+                IsVisible="{Binding Timer.IsRunning}"
+                Pressed="imgbtn_Right_Pressed"
+                Released="ThrustDirectionButton_Released"/>
+            <!--Image displays when the simulation is paused
+            Tapping it will play simulation again through PlayPauseCommand binding 
+            Uses data triggers to change whether it is visible or not-->
+            <Image x:Name="img_Paused"
+                   AbsoluteLayout.LayoutBounds="0.5,0,0.2,0.2"
+                   AbsoluteLayout.LayoutFlags="All">
+                <Image.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{Binding Timer.IsRunning}" Value="True">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Image" Binding="{Binding Timer.IsRunning}" Value="False">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Image.Triggers>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PlayPauseCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <!--x,y,width,height: centre, nearly at bottom and to fit half the size of the screen -->
+            <controls:RocketDataView x:Name="rocketDataView" 
+                                     AbsoluteLayout.LayoutBounds="1,0" 
+                                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                                     Margin="10"/>
+            <!--For displaying messages to the user about the rocket's state. Default to transparent (invisible)-->
+            <Label x:Name="lbl_TextDisplay" 
+                   Opacity="0"
+                   FontSize="Medium"
+                   TextColor="LightGray"
+                   AbsoluteLayout.LayoutBounds="0.5,0"
+                   AbsoluteLayout.LayoutFlags="PositionProportional"/>
+        </AbsoluteLayout>
+    </ContentView.Content>
+</ContentView>

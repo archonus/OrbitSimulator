@@ -1,0 +1,9 @@
+*.sql
+*.exe
+*.dll
+*.cd
+**/bin/
+.vs
+**/.vs/
+*.cache
+**/obj/

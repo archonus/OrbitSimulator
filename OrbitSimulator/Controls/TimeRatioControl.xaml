@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:orbitsimulator="clr-namespace:OrbitSimulator" 
+             x:DataType="orbitsimulator:TimerViewModel"
+             x:Class="OrbitSimulator.Controls.TimeRatioControl">
+  <ContentView.Content>
+      <StackLayout Orientation="Horizontal" HeightRequest="25">
+            <ImageButton x:Name="btn_SlowDown" Command="{Binding SlowDowTimeCommand}"/>
+            <Label x:Name="lbl_TimeRatio" Text="{Binding TimeRatio, StringFormat='Time Ratio: {0:0.##}'}" VerticalOptions="Center" />
+            <ImageButton x:Name="btn_SpeedUp" Command="{Binding SpeedUpTimeCommand}"/>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrbitSimulator.Controls.StageBuildView"
+             xmlns:controls="clr-namespace:OrbitSimulator.Controls" 
+             xmlns:orbitsimulator="clr-namespace:OrbitSimulator" x:DataType="orbitsimulator:RocketBuildViewModel"
+             x:Name="this">
+    <ContentView.Content>
+        <Frame BorderColor="Gray">
+            <StackLayout>
+                <Label x:Name="lbl_Title" FontSize="Subtitle"/>
+                <!--Binds to the asynchronous task of retrieving all stages-->
+                <Picker x:Name="picker_Stage" 
+                        Title="Stage template" 
+                        ItemsSource="{Binding GetStagesWithCustomTask.Result}" 
+                        ItemDisplayBinding="{Binding Name}" 
+                        SelectedIndex="0" 
+                        SelectedIndexChanged="picker_Stage_SelectedIndexChanged" 
+                        HorizontalOptions="Start"/>
+                <StackLayout x:Name="stck_StageSelection">
+                    <controls:LabelledInput x:Name="input_Fuel" Label="Propellant Mass" IsNumeric="True" Units="kg"/>
+                    <controls:LabelledInput x:Name="input_Structure" Label="Structural Mass" IsNumeric="True" Units="kg"/>
+                    <!--Binds to the asynchronous tasks to retrieving all names-->
+                    <Picker x:Name="picker_Engine" 
+                            Title="Engine" 
+                            ItemsSource="{Binding GetEnginesTask.Result}" 
+                            ItemDisplayBinding="{Binding Name}" 
+                            HorizontalOptions="Start"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

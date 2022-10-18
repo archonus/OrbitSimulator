@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrbitSimulator.Pages.RocketSelectionPage"
+             xmlns:controls="clr-namespace:OrbitSimulator.Controls" 
+             xmlns:orbitsimulator="clr-namespace:OrbitSimulator" 
+             x:DataType="orbitsimulator:RocketBuildViewModel"
+             Title="Select Rocket">
+    <ContentPage.Content>
+        <StackLayout Margin="20" Spacing="20">
+            <Picker x:Name="picker_SelectedRocket" 
+                    Title="Rocket template"
+                    HorizontalOptions="Start"
+                    ItemsSource="{Binding GetRocketsTask.Result}" 
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedRocket}"/>
+            <Button x:Name="btn_Start" Text="Launch Rocket" Clicked="btn_Start_Clicked" HorizontalOptions="Start"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

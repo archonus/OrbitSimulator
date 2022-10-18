@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:orbitsimulator="clr-namespace:OrbitSimulator" x:DataType="orbitsimulator:SimulationViewModel"
+             x:Class="OrbitSimulator.Controls.RocketDataView">
+  <ContentView.Content>
+        <Frame BackgroundColor="LightGray" >
+            <StackLayout Padding="0">
+                <Label Text="{Binding CurrentTime, StringFormat='Time: {0:F1} sec'}"/>
+                <Label Text="{Binding StageNumber, StringFormat='Stage Number: {0}'}"/>
+                <!--Height display-->
+                <Label Text="{Binding Height, StringFormat='Height: {0:F} km'}"/>
+                <!--Velocity Display-->
+                <Label Text="{Binding Speed, StringFormat='Speed: {0:F} km/h'}"/>
+                <!--Fuel Display-->
+                <Label Text="{Binding Fuel, StringFormat='Fuel: {0:0.#} kg'}"/>
+                <!--REVIEW Should this be a percentage?-->
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>
